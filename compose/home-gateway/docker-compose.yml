@@ -1,0 +1,29 @@
+version: '3.2'
+
+services:
+  ha-plugin:
+    image: hub.foundries.io/lmp-demo/ha-plugin
+    restart: always
+    ports:
+      - 8080:${PORT-8080}
+    environment:
+      MSG: "${MSG-Hello world}"
+
+  ha-app:
+    image: hub.foundries.io/lmp-demo/ha-app
+    restart: always
+    ports:
+      - 8081:${PORT-8080}
+    environment:
+      MSG: "${MSG-Hello world}"
+
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:2022.11.4"
+    ports:
+      - 8123:8123
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - .config/home-assistant:/config
+    restart: unless-stopped
+    privileged: false
