@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  FIO_FACTORY: lmp-demo
+  FIO_FACTORY: vanessa-tuf-test
   FIO_REGISTRY: hub.foundries.io
   DOCKER_IMAGES_DIR: docker
 
