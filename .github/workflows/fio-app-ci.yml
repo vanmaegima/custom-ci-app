@@ -53,9 +53,10 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v3
         with:
+          outputs: type=registry,oci-mediatypes=false
+          provenance: false
           platforms: linux/amd64,linux/arm64
           context: "{{ defaultContext }}:${{ env.DOCKER_IMAGES_DIR }}/${{ matrix.docker_dir }}"
-          push: true
           tags: |
             ${{ env.FIO_REGISTRY }}/${{ env.FIO_FACTORY }}/${{ matrix.docker_dir }}:${{ steps.tag.outputs.short_sha }}
             ${{ env.FIO_REGISTRY }}/${{ env.FIO_FACTORY }}/${{ matrix.docker_dir }}:latest
